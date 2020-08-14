@@ -20,7 +20,7 @@ massive({
     console.log("Database is connected!")
 }).catch(err => console.log(err))
 
-// app.get('', ctrl.get)
+app.post('/auth/login', ctrl.login)
 
 app.listen(SERVER_PORT, () => {
    console.log(`Server is running on port ${SERVER_PORT}`); 
