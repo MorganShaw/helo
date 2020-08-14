@@ -11,8 +11,8 @@ class Nav extends React.Component {
             <div className='nav-container'>
                 <div className="top-three">
                     <div className='profile-container'>
-                        <img src='' alt='profile'/>
-                        {/* <p>{this.props.username}</p> */}
+                        <img className='profile-pic' src='https://robohash.org/why' alt='profile'/>
+                        <p>PLACEHOLDER: PUT USERNAME HERE</p>
                     </div>
                     <Link to='/dashboard'>
                         {/* <img className='home-icon' src="./home_icon.png" alt='home'/> */}

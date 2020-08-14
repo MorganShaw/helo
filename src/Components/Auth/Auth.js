@@ -24,12 +24,15 @@ class Auth extends React.Component {
     login = () => {
         const {username, password} = this.state;
         axios.post('/auth/login', {username, password}).then(res => {
-            this.setState({
-                username: res.data,
-                password: res.data
-            })
+            this.props.login(res.data)
+            this.props.history.push('/dashboard')
+        }).catch(err => {
+            console.log(err)
+            alert("Login Failed")
         })
     }
+
+    register = ()
     render(){
         const {username, password, firstName, lastName} = this.state;
         return(
@@ -40,15 +43,15 @@ class Auth extends React.Component {
                     <div className='login-inputs'>
                         <div className='input-block'>
                             <p>Username: </p>
-                            <input/>
+                            <input placeholder='username' name="username" value={username} type="text" onChange={e => this.handleChange(e)}/>
                         </div>
                         <div className='input-block'>
                             <p>Password: </p>
-                            <input/>
+                            <input placeholder='password' name="password" value={password} type="text" onChange={e => this.handleChange(e)}/>
                         </div>
                     <div className ='btn-container'>
-                        <button>Login</button>
-                        <button>Register</button>
+                        <button onClick={this.login}>Login</button>
+                        <button onClick={this.register}>Register</button>
                     </div>
                     </div>
                 </div>

@@ -16,7 +16,16 @@ CREATE TABLE posts (
 ALTER TABLE users
 ALTER COLUMN password TYPE TEXT;
 
--- Dummy data. Seems like I can't put dummy data into the users table because I can't store a password in the database (unless it's a hash password). I tried putting some awesome dummy data into the posts table (but it didn't work because I can't figure out how to do that with the author_id referencing the user id.)
+
+
+
+
+
+
+
+--------------- Dummy data ---------------
+
+-- Seems like I can't put dummy data into the users table because I can't store a password in the database (unless it's a hash password). I tried putting some awesome dummy data into the posts table (but it didn't work because I can't figure out how to do that with the author_id referencing the user id. Ok. I'll put some dummy data into Postman.)
 INSERT INTO users (title, username, profile_pic)
 VALUES
 
