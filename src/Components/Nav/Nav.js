@@ -3,7 +3,11 @@ import React from 'react';
 class Nav extends React.Component {
     render(){
         return(
-            <div>Nav</div>
+            <div>
+                <button>Home</button>
+                <button>New Post</button>
+                <button>Logout</button>
+            </div>
         )
     }
 }
