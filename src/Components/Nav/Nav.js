@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import './home_icon.png';
 import './log_out_icon.png';
 import './new_post_icon.png';
+import {connect} from 'react-redux';
 
 class Nav extends React.Component {
     render(){
@@ -32,9 +33,19 @@ class Nav extends React.Component {
     }
 }
 
-export default Nav; 
+const mapStateToProps = state => state;
 
-{/* <Route exact path="/" component={Auth}/>
-<Route path="/dashboard" component={Dashboard}/>
-<Route path="/post/:postid" component={Post}/>
-<Route path="/new" component={Form}/> */}
+function mapStateToProps(reduxState){
+    return {
+        username: reduxState.reducer.username,
+        profilePic: 
+    }
+}
+function mapStateToProps(state => state {
+    this.setState({
+        username: '',
+        profilePic: ''
+    })
+})
+
+export default connect(mapStateToProps)(Nav);

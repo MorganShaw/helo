@@ -9,10 +9,18 @@ const initialState = {
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER;'
 
-
+//Look into this. Not sure about parameters and payload value:
 export function loginUser(username, profilePic){
     return {
         type: LOGIN_USER,
-        payload: ,
+        payload: user
     }
 }
+
+export function reducer(state = initialState, action) {
+    switch(action.type){
+        default:
+            return initialState
+    }
+}
+
