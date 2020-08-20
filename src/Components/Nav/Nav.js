@@ -6,14 +6,16 @@ import './log_out_icon.png';
 import './new_post_icon.png';
 import {connect} from 'react-redux';
 
-class Nav extends React.Component {
-    render(){
+const Nav = () => {
+    
+    // render(){
+        // console.log(this.props);
         return(
             <div className='nav-container'>
                 <div className="top-three">
                     <div className='profile-container'>
                         <img className='profile-pic' src='https://robohash.org/why' alt='profile'/>
-                        <p>PLACEHOLDER: PUT USERNAME HERE</p>
+                        <p>PLACEHOLDER: PUT USERNAME HERE {this.props.username}</p>
                     </div>
                     <Link to='/dashboard'>
                         {/* <img className='home-icon' src="./home_icon.png" alt='home'/> */}
@@ -30,22 +32,16 @@ class Nav extends React.Component {
                 </Link>
             </div>
         )
-    }
+    // }
 }
 
-const mapStateToProps = state => state;
+// const mapStateToProps = state => state;
 
 function mapStateToProps(reduxState){
     return {
         username: reduxState.reducer.username,
-        profilePic: 
-    }
+        profilePic: reduxState.reducer.profilePic
+    };
 }
-function mapStateToProps(state => state {
-    this.setState({
-        username: '',
-        profilePic: ''
-    })
-})
 
 export default connect(mapStateToProps)(Nav);

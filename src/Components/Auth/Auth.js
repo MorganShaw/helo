@@ -2,16 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import './Auth.css';
 import '../../helo_icon.png';
+import { loginUser } from "../../redux/reducer";
+import { connect } from 'react-redux';
 // import e from 'express';
 class Auth extends React.Component {
     constructor() {
         super();
         this.state = {
             username: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            newUser: false
+            password: ''
         }
     }
 
@@ -24,7 +23,7 @@ class Auth extends React.Component {
     login = () => {
         const {username, password} = this.state;
         axios.post('/auth/login', {username, password}).then(res => {
-            this.props.login(res.data)
+            this.props.loginUser(res.data)
             this.props.history.push('/dashboard')
         }).catch(err => {
             console.log(err)
@@ -32,7 +31,16 @@ class Auth extends React.Component {
         })
     }
 
-    register = ()
+    // register = ()
+
+    register = () => {
+        const {username, password} = this.state;
+        axios.post('/auth/register', {username, password}).then(res => {
+            this.setState 
+        })
+    }
+
+
     render(){
         const {username, password, firstName, lastName} = this.state;
         return(

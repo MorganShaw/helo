@@ -1,6 +1,21 @@
 import React from 'react';
+import { connect } from "react-redux";
 
 class Dashboard extends React.Component {
+    constructor(){
+        super();
+        this.state({
+            posts: [],
+            search: '',
+            userposts: true
+        })
+    }
+
+    //method: get all posts from database
+
+    //method: reset search
+
+
     render(){
         return(
             <div>Dashboard</div>
@@ -8,4 +23,4 @@ class Dashboard extends React.Component {
     }
 }
 
-export default Dashboard;
+export default connect()(Dashboard);

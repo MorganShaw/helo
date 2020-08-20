@@ -23,7 +23,7 @@ module.exports = {
     },
     register: async (req, res) => {
         const db = req.app.get('db');
-        const {username, password, profilePic} = req.body;
+        const {username, password} = req.body;
         const existingUser = await db.check_user(username);
         if(existingUser[0]){
             return res.status(409).send('User already exists.')
