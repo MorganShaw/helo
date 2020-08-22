@@ -9,14 +9,15 @@ const initialState = {
 // const REGISTER_USER = 'REGISTER_USER';
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER;'
+const REGISTER_USER = 'REGISTER_USER;'
 
 //Look into this. Not sure about parameters and payload value:
-// export function registerUser(user){
-//     return {
-//         type: REGISTER_USER,
-//         payload: user
-//     }
-// }
+export function registerUser(user){
+    return {
+        type: REGISTER_USER,
+        payload: user
+    }
+}
 
 export function loginUser(user){
     //refer to Auth.js line 27 (res.data passed into this.props.loginUser)
@@ -42,6 +43,8 @@ export default function reducer(state = initialState, action) {
             // return {...state, username: action.payload.username, id: action.payload.id, profilePic: action.payload.profilePic  }
         // case REGISTER_USER:
         //     return {...state, ...action.payload}  
+        case REGISTER_USER:
+            return {...state, ...action.payload}
         case LOGOUT_USER:
             return {...state, ...action.payload}
         default:

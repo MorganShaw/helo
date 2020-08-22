@@ -4,6 +4,7 @@ import './Auth.css';
 import '../../helo_icon.png';
 import { loginUser } from "../../redux/reducer";
 import { connect } from 'react-redux';
+import { registerUser} from '../../redux/reducer';
 // import e from 'express';
 class Auth extends React.Component {
     constructor() {
@@ -35,7 +36,7 @@ class Auth extends React.Component {
             this.props.history.push('/dashboard')
         }).catch(err => {
             console.log(err)
-            alert("Login Failed")
+            alert("Login Failed. Try registering as a new user.")
         })
     }
 
@@ -43,7 +44,7 @@ class Auth extends React.Component {
     register = () => {
         const {username, password, profilePic} = this.state;
         axios.post('/auth/register', {username, password, profilePic}).then(res => {
-           this.props.loginUser(res.data);
+           this.props.registerUser(res.data)
            this.props.history.push('/dashboard') 
         }).catch(err => {
             console.log(err)
@@ -73,7 +74,7 @@ class Auth extends React.Component {
                         </div>
                     <div className ='btn-container'>
                         <button onClick={this.login}>Login</button>
-                        <button onClick={this.register}>Register</button>
+                        <button onClick={this.toggle}>Register</button>
                     </div>
                     </div>
                     :
@@ -84,7 +85,7 @@ class Auth extends React.Component {
                         </div>
                         <div className='input-block'>
                             <p>Password: </p>
-                            <input placeholder='password' name="password" value={password} type="text" onChange={e => this.handleChange(e)}/>
+                            <input placeholder='password' name="password" value={password} type="password" onChange={e => this.handleChange(e)}/>
                         </div>
                         <div className='input-block'>
                             <p>Profile Picture: </p>
@@ -106,4 +107,4 @@ class Auth extends React.Component {
 
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps, {loginUser})(Auth);
+export default connect(mapStateToProps, {loginUser, registerUser})(Auth);

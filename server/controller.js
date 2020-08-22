@@ -25,13 +25,15 @@ module.exports = {
     register: async (req, res) => {
         const db = req.app.get('db');
         const {username, password, profilePic} = req.body;
-        const existingUser = await db.check_user([username]);
-        if(existingUser[0]){
-            return res.status(409).send('User already exists.')
+        console.log(req.body);
+        const [existingUser] = await db.check_user(username);
+        if(existingUser){
+            res.status(409).send('User already exists.')
         } else {
         const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(password, salt)
-        const [newUser] = await db.user.create_user([username, hash, profilePic]);
+        const hash = bcrypt.hashSync(password, salt);
+        const [newUser] = await db.create_user([username, hash, profilePic]);
+        // req.session.user = newUser[0];
         req.session.user = {
             userId: newUser.id,
             username: newUser.username,

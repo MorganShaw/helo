@@ -29,13 +29,15 @@ massive({
 //Endpoints for authentication
 app.post('/auth/login', ctrl.login)
 app.post('/auth/register', ctrl.register)
-//app.get('/auth/logout', ctrl.logout)
+app.post('/auth/logout', ctrl.logout)
 //app.get('/auth/user', ctrl.getUser)
 
 //Endpoints for posts
-// app.get('/api/posts/:userid', ctrl.getUserPosts)
-// app.get('/api/post/:postid', ctrl.getPost)
-// app.post('/api/post/:userid', ctrl.createPost)
+// app.get('/api/posts/:id', ctrl.getUserPosts)
+// app.get('/api/post/:id', ctrl.getPost)
+// app.post('/api/post/:id', ctrl.createPost)
+// app.put('/api/post/:id', ctrl.editPost)
+// app.delete('/api/post/:id', ctrl.deletePost)
 
 app.listen(SERVER_PORT, () => {
    console.log(`Server is running on port ${SERVER_PORT}`); 

@@ -11,13 +11,12 @@ import {logoutUser} from '../../redux/reducer';
 class Nav extends React.Component {
     
     logout = () => {
-        axios.get('/auth/logout').then(res => {
+        axios.post('/auth/logout').then(res => {
             this.props.logoutUser();
-            this.props.history.push('/');
+            this.props.history.push('/')
         }).catch(err => console.log(err))
     }
-    // render(){
-        // console.log(this.props);
+  
     render(){
     return(
         <div className='nav-container'>
