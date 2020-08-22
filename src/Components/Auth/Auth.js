@@ -10,10 +10,17 @@ class Auth extends React.Component {
         super();
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            profilePic: '',
+            newUser: false
         }
     }
 
+    toggle = () => {
+        this.setState({
+            newUser: !this.state.newUser
+        })
+    }
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -23,6 +30,7 @@ class Auth extends React.Component {
     login = () => {
         const {username, password} = this.state;
         axios.post('/auth/login', {username, password}).then(res => {
+            console.log(res.data)
             this.props.loginUser(res.data)
             this.props.history.push('/dashboard')
         }).catch(err => {
@@ -31,23 +39,29 @@ class Auth extends React.Component {
         })
     }
 
-    // register = ()
 
     register = () => {
-        const {username, password} = this.state;
-        axios.post('/auth/register', {username, password}).then(res => {
-            this.setState 
+        const {username, password, profilePic} = this.state;
+        axios.post('/auth/register', {username, password, profilePic}).then(res => {
+           this.props.loginUser(res.data);
+           this.props.history.push('/dashboard') 
+        }).catch(err => {
+            console.log(err)
+            alert("Registration failed")
         })
     }
 
 
     render(){
-        const {username, password, firstName, lastName} = this.state;
+        //The following is to see what's on the user object, which is created by the axios call...and is put as res.data on the function that corresponds with the action builder in the reducer function. 
+        // console.log(this.props.user)
+        const {username, password, profilePic, newUser} = this.state;
         return(
-            <div className="auth">
+            <div className="auth">    
                 <div className="login-container">
                     <img className='login-logo' src="/smile_wink_icon.png" alt='logo'/>
                     <h1>Helo</h1>
+                    {!newUser ? 
                     <div className='login-inputs'>
                         <div className='input-block'>
                             <p>Username: </p>
@@ -62,10 +76,34 @@ class Auth extends React.Component {
                         <button onClick={this.register}>Register</button>
                     </div>
                     </div>
+                    :
+                    <div className='login-inputs'>
+                        <div className='input-block'>
+                            <p>Username: </p>
+                            <input placeholder='username' name="username" value={username} type="text" onChange={e => this.handleChange(e)}/>
+                        </div>
+                        <div className='input-block'>
+                            <p>Password: </p>
+                            <input placeholder='password' name="password" value={password} type="text" onChange={e => this.handleChange(e)}/>
+                        </div>
+                        <div className='input-block'>
+                            <p>Profile Picture: </p>
+                            <input placeholder='Image URL' name="profilePic" value={profilePic} type="text" onChange={e => this.handleChange(e)}/>
+                        </div>
+                    <div className ='btn-container'>
+                        <button onClick={this.register}>Register</button>
+                        <button onClick={this.toggle}>I already have an account</button>
+                        {/* <button onClick={() => this.register()}>Register</button>
+                        <button onClick={() => this.register()}>I already have an account</button> */}
+                    </div>
+                    </div>
+                    }
                 </div>
             </div>
         )
     }
 }
 
-export default Auth;
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps, {loginUser})(Auth);

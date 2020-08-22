@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 class Dashboard extends React.Component {
     constructor(){
         super();
-        this.state({
+        this.state = {
             posts: [],
             search: '',
             userposts: true
-        })
+        }
     }
 
     //method: get all posts from database

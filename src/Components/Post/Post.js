@@ -3,7 +3,7 @@ import React from 'react';
 class Post extends React.Component {
     constructor(){
         super();
-        this.state({
+        this.state = ({
             title: '',
             img: '',
             content: '',
@@ -13,7 +13,7 @@ class Post extends React.Component {
     }
 
     // method: get post information
-    
+
     render(){
         return(
             <div>Post</div>

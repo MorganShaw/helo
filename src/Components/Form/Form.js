@@ -3,7 +3,7 @@ import React from 'react';
 class Form extends React.Component {
     constructor(){
         super();
-        this.state({
+        this.state = ({
             title: '',
             img: '',
             content: ''
