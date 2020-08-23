@@ -1,3 +1,5 @@
+
+//This is the New Post view
 import React from 'react';
 
 class Form extends React.Component {

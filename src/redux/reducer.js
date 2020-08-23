@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 const initialState = {
     username: '',
@@ -10,6 +10,7 @@ const initialState = {
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER;'
 const REGISTER_USER = 'REGISTER_USER;'
+const GET_USER = 'GET_USER;'
 
 //Look into this. Not sure about parameters and payload value:
 export function registerUser(user){
@@ -34,6 +35,15 @@ export function logoutUser(){
     }
 }
 
+export function getUser(){
+    const user = axios.get('/auth/user')
+    return {
+        type: GET_USER,
+        payload: user
+    }
+}
+
+
 export default function reducer(state = initialState, action) {
     switch(action.type){
         case LOGIN_USER:
@@ -47,6 +57,12 @@ export default function reducer(state = initialState, action) {
             return {...state, ...action.payload}
         case LOGOUT_USER:
             return {...state, ...action.payload}
+        case GET_USER + "_PENDING":
+            return state
+        case GET_USER + "_FULFILLED":
+            return {...state, ...action.payload}
+        case GET_USER + "_REJECTED":
+            return initialState
         default:
             return initialState
     }

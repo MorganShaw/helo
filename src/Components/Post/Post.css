@@ -1,0 +1,21 @@
+.post {
+    width: 800px;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: center;
+}
+
+.by-author-container {
+
+}
+
+.by-author-container > h2 {
+    font-size: 24px;
+}
+
+.by-author-container > img {
+    height: 100px;
+}

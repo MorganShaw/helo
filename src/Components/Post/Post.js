@@ -16,9 +16,19 @@ class Post extends React.Component {
 
     render(){
         return(
-            <div>Post</div>
+            <div className='post'>
+                <h1 className='post-title'>Post Title</h1>
+                <div className='by-author-container'>
+                    <h2>by {this.state.author}</h2>
+                    <img src={this.state.authorPicture}/>
+                </div>            
+                
+
+            </div>
         )
     }
 }
 
 export default Post;
+
+//wrap each post container in a Link, to go 

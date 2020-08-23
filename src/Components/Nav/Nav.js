@@ -7,9 +7,19 @@ import './log_out_icon.png';
 import './new_post_icon.png';
 import {connect} from 'react-redux';
 import {logoutUser} from '../../redux/reducer';
+import {getUser} from '../../redux/reducer';
+
+// import {withRouter} from 'react-router-dom';
 
 class Nav extends React.Component {
     
+    componentDidMount(){
+        this.props.getUser()
+        // if (this.props.user.username === "") {
+        //     this.props.history.push("/");
+        //   }
+    }
+
     logout = () => {
         axios.post('/auth/logout').then(res => {
             this.props.logoutUser();
@@ -23,7 +33,7 @@ class Nav extends React.Component {
             <div className="top-three">
                 <div className='profile-container'>
                     <img className='profile-pic' src={this.props.profilePic} alt='profile'/>
-                    <p>{this.props.username}Do styling for profile pic and name</p>
+                    <p>{this.props.username}</p>
                 </div>
                 <Link to='/dashboard'>
                     {/* <img className='home-icon' src="./home_icon.png" alt='home'/> */}
@@ -53,4 +63,4 @@ function mapStateToProps(reduxState){
     };
 }
 
-export default connect(mapStateToProps, {logoutUser})(Nav);
+export default connect(mapStateToProps, {logoutUser, getUser})(Nav);

@@ -3,7 +3,8 @@ const express = require('express');
 const session = require('express-session');
 const massive = require('massive');
 const app = express();
-const ctrl = require('./controller')
+const authCtrl = require('./authController');
+const postCtrl = require('./postController');
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
@@ -27,13 +28,13 @@ massive({
 }).catch(err => console.log(err))
 
 //Endpoints for authentication
-app.post('/auth/login', ctrl.login)
-app.post('/auth/register', ctrl.register)
-app.post('/auth/logout', ctrl.logout)
-//app.get('/auth/user', ctrl.getUser)
+app.post('/auth/login', authCtrl.login)
+app.post('/auth/register', authCtrl.register)
+app.post('/auth/logout', authCtrl.logout)
+app.get('/auth/user', authCtrl.getUser)
 
 //Endpoints for posts
-// app.get('/api/posts/:id', ctrl.getUserPosts)
+app.get('/api/posts/:id', postCtrl.getPosts)
 // app.get('/api/post/:id', ctrl.getPost)
 // app.post('/api/post/:id', ctrl.createPost)
 // app.put('/api/post/:id', ctrl.editPost)
