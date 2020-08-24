@@ -1,2 +1,1 @@
-SELECT * FROM posts
-WHERE 
+SELECT * FROM posts;

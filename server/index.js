@@ -34,7 +34,7 @@ app.post('/auth/logout', authCtrl.logout)
 app.get('/auth/user', authCtrl.getUser)
 
 //Endpoints for posts
-app.get('/api/posts/:id', postCtrl.getPosts)
+app.get('/api/posts/:id', postCtrl.getPostsByUserId)
 // app.get('/api/post/:id', ctrl.getPost)
 // app.post('/api/post/:id', ctrl.createPost)
 // app.put('/api/post/:id', ctrl.editPost)

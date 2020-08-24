@@ -13,6 +13,15 @@ class Dashboard extends React.Component {
             userposts: true
         }
     }
+    componentDidMount = (id) => {
+        // const {id} = this.props;
+        console.log('Props in the ComponentDidMount', this.props)
+        axios.get(`api/posts/${id}`).then(res => {
+            this.setState({
+                posts: res.data
+            })
+        })
+    }
 
     handleInput = (e) => {
         this.setState({
@@ -50,6 +59,9 @@ class Dashboard extends React.Component {
         console.log(this.state.userposts)
         const {posts} = this.state;
         //this isn't quite right, I don't think. Fix it.
+        // const userpostsTrue = posts.filter(post => {
+        //     return post.userposts
+        // }
         const mappedPosts = posts.map(post => {
             if(this.state.userposts === true){
                 return <Post key={post.id} post={post}/>
