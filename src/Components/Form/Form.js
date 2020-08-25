@@ -3,6 +3,7 @@
 import React from 'react';
 import axios from 'axios';
 import './Form.css';
+import {connect} from 'react-redux';
 
 class Form extends React.Component {
     constructor(){
@@ -15,7 +16,7 @@ class Form extends React.Component {
     }
 
     //method: handle change (3)
-    handleInput = (e) => {
+    handleChange = (e) => {
         this.setState({
             [e.target.name] : e.target.value
         })
@@ -23,14 +24,13 @@ class Form extends React.Component {
     //method: submit new post
 
     addPost = () => {
-        const { title, content, img } = this.state;
-        const {username} = this.props;
+        const { title, img, content } = this.state;
+        const {userId} = this.props;
         axios
-          .post("/api/posts", { title, content, img })
+          .post(`/api/posts/${userId}`, { title, img, content })
           .then((res) => {
-            this.setState({
-                posts: res.data
-            })
+            // this.props.getPosts(res.data)
+            this.props.history.push('/dashboard')
           })
           .catch((err) => console.log(err)
           ); 
@@ -69,10 +69,18 @@ class Form extends React.Component {
                             value={content}/>
 
                     </div>
+                    <button 
+                        onClick={() => this.addPost()}
+                        className='post-btn'>Post</button>
                 </section>
             </div>
         )
     }
 }
 
-export default Form;
+const mapStateToProps = (reduxState) => {
+    return {
+        userId: reduxState.userId
+    }
+}
+export default connect(mapStateToProps)(Form)

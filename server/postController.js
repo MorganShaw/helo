@@ -18,18 +18,19 @@ module.exports = {
         } 
     },
     addPost: async (req, res) => {
-        const { title, content, img } = req.body;
-        // const {id} = req.params;
+        const {userId} = req.params;
+        const { title, img, content } = req.body;
         const db = req.app.get("db");
-        const posts = await db.post([
+        const [post] = await db.add_post({
           title,
-          content,
           img,
-        ]);
-        res.status(200).send(products);
-      },
+          content,
+          author_id: post.userId
+        });
+        res.status(200).send(post);
+    }
 
-
+}
 
 
 // let filteredGenre = books.filter(book => book.genre === genre)
@@ -58,4 +59,3 @@ module.exports = {
 // }
 
 // const filteredTitle = posts.filter(post => post.title === search)
-

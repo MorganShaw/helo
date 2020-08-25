@@ -34,9 +34,10 @@
 
 .text-box {
     height: 200px;
+    margin-bottom: 15px;
 }
 
-h1 {
+section > h1 {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -51,7 +52,25 @@ h1 {
     flex-direction: column;
 }
 
-img {
+section > img {
     height: 200px;
+    width: 300px;
+    align-items: self;
+}
+
+.post-btn {
+    background-image: radial-gradient(circle at 50% -46%,#737373,#403d39);
+    color: white;
+    border: rgba(49, 48, 48, 0.452);
+    border-style: solid;
+    border-width: 1px;
+    height: 25px;
+    width: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* vertical-align: middle; */
+    margin: 0 auto;
+
 
 }
