@@ -1,23 +1,26 @@
 module.exports = {
-    getPostsByUserId: async (req, res) => {
+    getPosts: async (req, res) => {
         const {userposts, search} = req.query;
-        const {id} = req.params;
+        const {userId} = req.params;
         const db = req.app.get('db');
         if(userposts && search) {
-            const posts = await db.get_post_by_title(search)
+            const posts = await db.get_posts_by_title(`%${search}%`)
             res.status(200).send(posts)
         } else if(!userposts && !search) {
-            const posts = await db.get_post_by_author(id)
+            const posts = await db.get_posts_by_author(userId)
             res.status(200).send(posts)
         } else if(!userposts && search) {
-            const posts = await db.get_posts_by_author_title([id, search])
+            const posts = await db.get_posts_by_author_title([userId, `%${search}%`])
             res.status(200).send(posts)
         } else {
             const posts = await db.get_posts()
             res.status(200).send(posts)
         } 
     },
-    
+    // getPost: async (req,res) => {
+    //     const db = req.app.get('db')
+    //     const
+    // }
 }
 
 

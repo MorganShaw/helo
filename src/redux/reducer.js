@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const initialState = {
     username: '',
-    id: 0,
+    userId: 0,
     profilePic: ''
 }
 
@@ -21,7 +21,7 @@ export function registerUser(user){
 }
 
 export function loginUser(user){
-    //refer to Auth.js line 27 (res.data passed into this.props.loginUser)
+    //refer to Auth.js login method (res.data passed into this.props.loginUser)
     return {
         type: LOGIN_USER,
         payload: user

@@ -15,6 +15,7 @@ class Nav extends React.Component {
     
     componentDidMount(){
         this.props.getUser()
+        console.log('get user reducer', this.props.getUser())
         // if (this.props.user.username === "") {
         //     this.props.history.push("/");
         //   }
@@ -56,7 +57,7 @@ class Nav extends React.Component {
 // const mapStateToProps = state => state;
 
 function mapStateToProps(reduxState){
-    console.log("THIS IS REDUX STATE:", reduxState)
+    console.log("REDUX STATE Nav", reduxState)
     return {
         username: reduxState.username,
         profilePic: reduxState.profilePic

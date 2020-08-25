@@ -1,21 +1,36 @@
 .post {
-    width: 800px;
+    width: 650px;
     height: 150px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-left: 10px;
     padding-right: 10px;
     align-items: center;
+    background-color: white;
+    border-bottom: solid rgb(190, 188, 188) 1px;
+
+}
+
+.post-title {
+    font-size: 60px;
+    color: black;
+    display: flex;
+    
 }
 
 .by-author-container {
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 150px;
 }
 
 .by-author-container > h2 {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .by-author-container > img {
-    height: 100px;
+    height: 60px;
 }

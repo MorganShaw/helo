@@ -13,15 +13,20 @@ class Dashboard extends React.Component {
             userposts: true
         }
     }
-    componentDidMount = (id) => {
+    componentDidMount = () => {
         // const {id} = this.props;
-        console.log('Props in the ComponentDidMount', this.props)
-        axios.get(`api/posts/${id}`).then(res => {
+        // console.log('Props in the ComponentDidMount', this.props)
+        const {userId} = this.props;
+        const {search, userposts} = this.state;
+        axios.get(`api/posts/${userId}?search=${search}&userposts=${userposts}`).then(res => {
             this.setState({
                 posts: res.data
-            })
+            }) 
+        }).catch((err) => {
+            console.log(err)
         })
-    }
+    }       
+
 
     handleInput = (e) => {
         this.setState({
@@ -43,50 +48,84 @@ class Dashboard extends React.Component {
     //     })
     // }
 
-    searchPosts = () =>{
-        //Do something here to put in the onClick for the search icon.
-        //I think this is a getPost SQL query - SELECT * FROM posts WHERE id = $2;
-    }
+    // searchPosts = () =>{
+    //     //Do something here to put in the onClick for the search icon.
+    //     //I think this is a getPost SQL query - SELECT * FROM posts WHERE id = $2;
+    // }
 
     //method: reset search
     resetSearch = () => {
-        this.setState({
-            search: ''
+        const {userId} = this.props;
+        const {userposts} = this.state;
+        axios.get(`/api/posts/${userId}?userposts=${userposts}`).then(res => {
+            this.setState({
+                posts: res.data,
+                search: ''
+            })
         })
     }
 
     render(){
         console.log(this.state.userposts)
-        const {posts} = this.state;
-        //this isn't quite right, I don't think. Fix it.
-        // const userpostsTrue = posts.filter(post => {
-        //     return post.userposts
-        // }
+        const {posts, search, userposts} = this.state;
         const mappedPosts = posts.map(post => {
-            if(this.state.userposts === true){
-                return <Post key={post.id} post={post}/>
-            } 
-        })
+            return <Post key={post.id} post={post}/>
+            })
+
+
+        return (
+            <div className="dash-page">
+                {products.map((product, index, array) => {
+                return (
+                    <AdminProduct
+                    saveEdit={saveEdit}
+                    deleteProduct={deleteProduct}
+                    product={product}
+                    index={index}
+                    />
+
+
+
+
+
         return (
             <div className='dash-page'>
                 <header className='top-bar-search'>
                     <div className='search-bar'>
-                        <input onChange={(e) => this.handleInput(e)} className='search-input'/>
-                        <button className='search-btn' onClick={this.searchPosts}>search icon</button>
-                        <button className='search-reset' onClick={this.resetSearch}>Reset</button>
+                        <input 
+                            onChange={(e) => this.handleInput(e)} className='search-input' placeholder='Search by Title'
+                            name='search'
+                            value={search}/>
+                        <button 
+                            className='search-btn' 
+                            onClick={this.searchPosts}>Search</button>
+                        <button 
+                            className='search-reset' 
+                            onClick={this.resetSearch}>Reset</button>
                     </div>
                     <div className='my-post-checkbox'>
                         {/* <h1>My Posts</h1> */}
                         <label for='my-posts'>My Posts </label>
-                        <input id='my-posts' onChange={(e) => this.handleChange(e)} type='checkbox'/>
+                        <input 
+                            id='my-posts' 
+                            onChange={(e) => this.handleChange(e)} type='checkbox'
+                            name='userposts'
+                            value={userposts}/>
                     </div>
                 </header>
+                <div className='all-posts'>
                 {mappedPosts}
+                </div>
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (reduxState) => {
+    console.log("redux state userId", reduxState.userId)
+    return {
+        userId: reduxState.userId
+    }
+}
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(Dashboard)
