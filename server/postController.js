@@ -17,11 +17,17 @@ module.exports = {
             res.status(200).send(posts)
         } 
     },
-    // getPost: async (req,res) => {
-    //     const db = req.app.get('db')
-    //     const
-    // }
-}
+    addPost: async (req, res) => {
+        const { title, content, img } = req.body;
+        // const {id} = req.params;
+        const db = req.app.get("db");
+        const posts = await db.post([
+          title,
+          content,
+          img,
+        ]);
+        res.status(200).send(products);
+      },
 
 
 

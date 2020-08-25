@@ -5,8 +5,8 @@ import Post from '../Post/Post';
 import axios from 'axios';
 
 class Dashboard extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             posts: [],
             search: '',
@@ -65,29 +65,43 @@ class Dashboard extends React.Component {
         })
     }
 
+    // savePost = (title, content, img, author) => {
+    //     const {title, content, img, author} = this.props;
+    //     axios
+    //       .put(`/api/posts/${id}`, { title, content, img, author })
+    //       .then((res) => {
+    //         this.setState({
+    //             posts: res.data
+    //             })
+    //         })
+    //       .catch((err) => console.log(err)
+    //       ); 
+    // }
+    
+    
+    
+    // deleteProduct = (id) => {
+    //     const {id} = this.props;
+    //     axios
+    //       .delete(`/api/posts/${id}`)
+    //       .then((res) => {
+    //         this.setState({
+    //             posts: res.data
+    //         })
+    //       })
+    //       .catch((err) => console.log(err)
+    //       ); 
+    // }
+
+
+
+
     render(){
         console.log(this.state.userposts)
         const {posts, search, userposts} = this.state;
-        const mappedPosts = posts.map(post => {
-            return <Post key={post.id} post={post}/>
-            })
-
-
-        return (
-            <div className="dash-page">
-                {products.map((product, index, array) => {
-                return (
-                    <AdminProduct
-                    saveEdit={saveEdit}
-                    deleteProduct={deleteProduct}
-                    product={product}
-                    index={index}
-                    />
-
-
-
-
-
+        // const mappedPosts = posts.map(post => {
+        //     return <Post key={post.id} post={post}/>
+        //     })
         return (
             <div className='dash-page'>
                 <header className='top-bar-search'>
@@ -114,7 +128,17 @@ class Dashboard extends React.Component {
                     </div>
                 </header>
                 <div className='all-posts'>
-                {mappedPosts}
+                {/* {mappedPosts} */}
+                    {posts.map((post, index, array) => {
+                    return (
+                        <Post
+                        saveEdit={this.saveEdit}
+                        deletePost={this.deletePost}
+                        post={post}
+                        index={index}
+                        />
+                        );
+                    })};
                 </div>
             </div>
         )
