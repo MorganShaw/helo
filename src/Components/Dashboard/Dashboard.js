@@ -12,10 +12,15 @@ class Dashboard extends React.Component {
             search: '',
             userposts: true
         }
+        this.searchPosts = this.searchPosts.bind()
     }
     componentDidMount = () => {
         // const {id} = this.props;
         // console.log('Props in the ComponentDidMount', this.props)
+        this.searchPosts()
+    }       
+    
+    searchPosts = () => {
         const {userId} = this.props;
         const {search, userposts} = this.state;
         axios.get(`api/posts/${userId}?search=${search}&userposts=${userposts}`).then(res => {
@@ -25,8 +30,7 @@ class Dashboard extends React.Component {
         }).catch((err) => {
             console.log(err)
         })
-    }       
-
+    }
 
     handleInput = (e) => {
         this.setState({
@@ -48,7 +52,7 @@ class Dashboard extends React.Component {
     //     })
     // }
 
-    // searchPosts = () =>{
+    // searchPosts = () => {
     //     //Do something here to put in the onClick for the search icon.
     //     //I think this is a getPost SQL query - SELECT * FROM posts WHERE id = $2;
     // }
@@ -64,6 +68,7 @@ class Dashboard extends React.Component {
             })
         })
     }
+
 
     // savePost = (title, content, img, author) => {
     //     const {title, content, img, author} = this.props;
@@ -97,11 +102,13 @@ class Dashboard extends React.Component {
 
 
     render(){
-        console.log(this.state.userposts)
+
+        
         const {posts, search, userposts} = this.state;
-        // const mappedPosts = posts.map(post => {
-        //     return <Post key={post.id} post={post}/>
-        //     })
+        const mappedPosts = posts.map(post => {
+            return <Post key={post.id} title={post.title} username={post.username} profilePic={post.profilePic} post={post}/>
+
+            })
         return (
             <div className='dash-page'>
                 <header className='top-bar-search'>
@@ -112,10 +119,10 @@ class Dashboard extends React.Component {
                             value={search}/>
                         <button 
                             className='search-btn' 
-                            onClick={this.searchPosts}>Search</button>
+                            onClick={() => this.searchPosts()}>Search</button>
                         <button 
                             className='search-reset' 
-                            onClick={this.resetSearch}>Reset</button>
+                            onClick={() => this.resetSearch()}>Reset</button>
                     </div>
                     <div className='my-post-checkbox'>
                         {/* <h1>My Posts</h1> */}
@@ -128,17 +135,8 @@ class Dashboard extends React.Component {
                     </div>
                 </header>
                 <div className='all-posts'>
-                {/* {mappedPosts} */}
-                    {posts.map((post, index, array) => {
-                    return (
-                        <Post
-                        saveEdit={this.saveEdit}
-                        deletePost={this.deletePost}
-                        post={post}
-                        index={index}
-                        />
-                        );
-                    })};
+                {mappedPosts}
+            
                 </div>
             </div>
         )

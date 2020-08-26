@@ -18,14 +18,16 @@ class Post extends React.Component {
     // method: get post information
 
     render(){
-        const {title, author, profilePic} = this.props;
+        const {title} = this.props;
+        console.log(this.props.post)
+
         // const {title, author, profilePic} = this.state;
         return(
             <div className='post'>
                 <h1 className='post-title'>{title}</h1>
                 <div className='by-author-container'>
-                    <h2>by {author}</h2>
-                    <img src={profilePic}/>
+                    <h2>by {this.props.post.username}</h2>
+                    <img src={this.props.post.profile_pic}/>
                 </div>            
                 
 

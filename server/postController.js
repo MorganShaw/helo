@@ -21,12 +21,13 @@ module.exports = {
         const {userId} = req.params;
         const { title, img, content } = req.body;
         const db = req.app.get("db");
-        const [post] = await db.add_post({
+        //Pass them in as an object when you're going to reference them by variable names instead of $1, $2, etc in the SQL query.
+        const [post] = await db.add_post(
           title,
           img,
           content,
-          author_id: post.userId
-        });
+          userId
+        );
         res.status(200).send(post);
     }
 
